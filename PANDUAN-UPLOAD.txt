@@ -1,0 +1,56 @@
+STUDIO SKENARIO – PANDUAN UNGGAH KE HOSTING
+SMK Negeri 7 Surakarta · Dikembangkan oleh Noves Hendiansa, S.Sn.
+=========================================================
+
+ISI FOLDER
+  index.html              Aplikasi utama (semua fitur, huruf, logo, pembuat PDF & Word di dalamnya)
+  sw.js                   Service worker: menyimpan aplikasi agar bisa dipakai tanpa internet
+  manifest.webmanifest    Data aplikasi untuk tombol "Pasang aplikasi"
+  icons/                  Ikon aplikasi (logo sekolah)
+  .htaccess               Pengaturan untuk hosting Apache/cPanel (file tersembunyi)
+  PANDUAN-UPLOAD.txt      Berkas ini (tidak perlu diunggah)
+
+SYARAT PENTING
+  - Situs harus dibuka lewat HTTPS (https://...). Mode offline dan tombol
+    "Pasang aplikasi" hanya berfungsi di HTTPS. Hampir semua hosting
+    menyediakan SSL gratis (Let's Encrypt / AutoSSL) di cPanel.
+  - Unggah SEMUA berkas dalam satu folder yang sama, jangan dipisah.
+
+CARA 1 – cPanel (hosting sekolah / hosting berbayar)
+  1. Masuk cPanel > File Manager > buka folder public_html.
+     Untuk alamat seperti https://sekolah.sch.id/skenario, buat folder
+     "skenario" di dalam public_html lalu masuk ke folder itu.
+  2. Klik Upload, pilih studio-skenario.zip.
+  3. Klik kanan zip > Extract. Pastikan index.html berada langsung di
+     folder tujuan (bukan di dalam subfolder lagi). Hapus zip setelahnya.
+  4. Di File Manager, aktifkan Settings > "Show Hidden Files" untuk
+     memastikan .htaccess ikut terunggah.
+  5. Buka alamatnya di browser. Selesai.
+
+CARA 2 – Gratis tanpa hosting
+  Netlify Drop : buka https://app.netlify.com/drop lalu seret folder
+                 studio-skenario ke halaman itu. Langsung dapat alamat HTTPS.
+  GitHub Pages : unggah isi folder ke repositori, lalu aktifkan
+                 Settings > Pages.
+
+MEMAKAI DI PANEL INTERAKTIF / HP / LAPTOP
+  1. Buka alamat situs sekali saat ada internet (pakai Chrome/Edge).
+     Aplikasi otomatis tersimpan di perangkat.
+  2. Klik tombol "Pasang aplikasi" di bilah atas (atau menu Chrome >
+     "Instal aplikasi" / "Tambahkan ke layar utama").
+  3. Setelah itu aplikasi bisa dibuka dari ikon di layar utama, layar
+     penuh, walaupun internet mati.
+
+TENTANG DATA SISWA
+  - Proyek tersimpan di browser perangkat masing-masing, terpisah per
+    nama + kelas + nomor absen. Tidak ada data yang dikirim ke server.
+  - Untuk pindah perangkat: menu Proyek > Unduh cadangan (.json), lalu
+    Proyek > Impor di perangkat lain.
+  - Menghapus data browser (clear browsing data) akan menghapus proyek.
+    Ingatkan siswa untuk rutin mengunduh cadangan atau naskah (PDF/Word).
+
+MEMPERBARUI APLIKASI
+  Ganti index.html di hosting, lalu di sw.js ubah baris
+    const CACHE = 'studio-skenario-v1';
+  menjadi v2, v3, dst. Perangkat akan mengambil versi baru saat online
+  dan memberi tahu pengguna untuk memuat ulang.
